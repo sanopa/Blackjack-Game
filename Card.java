@@ -22,4 +22,37 @@ public class Card
         suit = s;
         value = v;
     }
+    
+    /**
+     * Accessors
+     */
+    public int getSuit() {
+        return suit;
+    }
+    
+    public String getValue() {
+        return value;
+    }
+    
+    /**
+     * Other
+     */
+    public String toString() {
+        String result = value + " of ";
+        switch (suit) {
+            case 1:
+                result += "Clubs";
+                break;
+            case 2:
+                result += "Diamonds";
+                break;
+            case 3:
+                result += "Hearts";
+                break;
+            case 4:
+                result += "Spades";
+                break;
+        }
+        return result;
+    }
 }
