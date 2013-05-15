@@ -9,6 +9,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 public class GUIFrame extends JFrame{
+	private static final long serialVersionUID = 1L;
 	JPanel pane = new JPanel();
 	JButton play = new JButton("Play");
 	GUIFrame() {
