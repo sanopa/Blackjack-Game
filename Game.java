@@ -62,6 +62,7 @@ public class Game
     
     /** Other methods **/
     public void play() {
+        Scanner reader = new Scanner(System.in);
         int stands = 0;
         while (stands < pnum-1) {
             stands = 0;
@@ -71,10 +72,20 @@ public class Game
                 } else if (p instanceof Dealer) {
                     p.draw(deck);
                 } else {
-                    
+                    System.out.println(p.toString());
+                    System.out.println("Draw (1) or Stand (2)? ");
+                    int choice = reader.nextInt();
+                    if (choice == 1) {
+                        p.draw(deck);
+                        System.out.println("New Hand:");
+                        System.out.println(p.toString());
+                    } else {
+                        p.stand();
+                    }
                 }
             }
         }
+        showResult();
     }
     
     public void createDeck() {
