@@ -43,7 +43,7 @@ public class Game
         }
         if (winners.size() == 0) {
             for (Player p: players) {
-                if (p.getValue() == dev) {
+                if (Math.abs(p.getValue() - 21) == dev) {
                     winners.add(p);
                 }
             }
