@@ -24,6 +24,7 @@ public class GUIFrame extends JFrame{
 		Object source = event.getSource();
 		if (source == play) {
 			Game newGame = new Game();
+			newGame.play();
 		}
 	}
 	public static void main(String[] args) {
