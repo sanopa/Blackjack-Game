@@ -1,0 +1,25 @@
+#BlueJ class context
+comment0.params=
+comment0.target=Player()
+comment0.text=Default\ Constructor\ *
+comment1.params=n
+comment1.target=Player(java.lang.String)
+comment1.text=Normal\ Constructor\ *
+comment2.params=
+comment2.target=void\ stand()
+comment2.text=Mutator\ *
+comment3.params=
+comment3.target=java.lang.String\ getName()
+comment3.text=Accessors\ *
+comment4.params=
+comment4.target=boolean\ getStand()
+comment5.params=
+comment5.target=int\ getValue()
+comment6.params=deck
+comment6.target=void\ draw(java.util.ArrayList)
+comment6.text=Other\ methods\ *
+comment7.params=
+comment7.target=void\ sum()
+comment8.params=
+comment8.target=java.lang.String\ toString()
+numComments=9
