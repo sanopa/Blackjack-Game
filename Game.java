@@ -35,7 +35,7 @@ public class Game
             if (p.getValue() == 21) {
                 winners.add(p);
             }
-            else if (Math.abs(p.getValue() - 21) < dev && p.getValue() < 21) {
+            else if (Math.abs(p.getValue() - 21) < dev && p.getValue() < 21 && over) {
                 dev = Math.abs(p.getValue() - 21);
                 over = false;
             }
@@ -45,12 +45,14 @@ public class Game
         }
         if (winners.size() == 0) {
             for (Player p: players) {
-                if (Math.abs(p.getValue() - 21) == dev && p.getValue() > 21 && !over) {
-                    winners.add(p);
-                }
-                else if (Math.abs(p.getValue() - 21) == dev && over) {
-                	winners.add(p);
-                }
+            	if (over) {
+	                if (Math.abs(p.getValue() - 21) == dev) {
+	                    winners.add(p);
+	                }
+            	}
+            	else if (Math.abs(p.getValue() - 21) == dev && (p.getValue() < 21)) {
+            		winners.add(p);
+            	}
             }
         }
         winner += "\n\nThe winner(s):\n";
