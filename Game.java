@@ -9,14 +9,12 @@ import java.util.*;
 public class Game
 {
     private ArrayList<Player> players;
-    private Player winner;
     private int pnum;
     private ArrayList<Card> deck;
     
     /** Default Constructor **/
     public Game() {
         players = new ArrayList<Player>();
-        winner = new Player();
         pnum = 0;
         deck = new ArrayList<Card>();
         createDeck();
@@ -25,7 +23,6 @@ public class Game
     /** Normal Constructor **/
     public Game(int num) {
         players = new ArrayList<Player>();
-        winner = new Player();
         pnum = num;
         deck = new ArrayList<Card>();
         createDeck();
@@ -33,7 +30,34 @@ public class Game
     }
     
     /** Accessors **/
-    public void showResult() {
+    public String showResult() {
+    	String winner = "";
+    	int dev = 21;
+    	ArrayList<Player> winners = new ArrayList<Player>();
+    	for (Player p: players) {
+    		winner += p.getName() + " " + p.getValue() + "\n";
+    		if (p.getValue() == 21) {
+    			winners.add(p);
+    		}
+    		else if (Math.abs(p.getValue() - 21) < dev && p.getValue() < 21) {
+    			dev = Math.abs(p.getValue() - 21);
+    		}
+    		else if (Math.abs(p.getValue() - 21) < dev) {
+    			dev = Math.abs(p.getValue() - 21);
+    		}
+    	}
+    	if (winners.size() == 0) {
+    		for (Player p: players) {
+    			if (p.getValue() == dev) {
+    				winners.add(p);
+    			}
+    		}
+    	}
+    	winner += "\n\nThe winner(s):\n";
+    	for (int i = 0; i < winners.size(); i++) {
+    		winner += winners.get(i).toString();
+    	}
+    	return winner;
     }
     
     /** Other methods **/
