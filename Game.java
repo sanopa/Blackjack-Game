@@ -37,6 +37,22 @@ public class Game
     }
     
     /** Other methods **/
+    public void play() {
+        int stands = 0;
+        while (stands < pnum-1) {
+            stands = 0;
+            for (Player p : players) {
+                if (!p.getStand()) {
+                    stands++;
+                } else if (p instanceof Dealer) {
+                    p.draw(deck);
+                } else {
+                    
+                }
+            }
+        }
+    }
+    
     public void createDeck() {
         for (Card.Suit suit : Card.Suit.values()) {
             for (Card.Rank rank : Card.Rank.values())
@@ -59,5 +75,6 @@ public class Game
         d.draw(deck);
         d.draw(deck);
         players.add(d);
+        reader.close();
     }
 }
