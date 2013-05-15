@@ -78,7 +78,7 @@ public class Player
     }
     
     public String toString() {
-        String result = "Name: " + name + "\n";
+        String result = "Name: " + getName() + "\n";
         result += "Hand: ";
         for (int i = 0; i < hand.size(); i++) {
             result += hand.get(i).toString();
