@@ -17,16 +17,16 @@ public class Game
         Scanner reader = new Scanner(System.in);
         System.out.print("Enter number of players: ");
         pnum = reader.nextInt();
-        players = new ArrayList<Player>();
+        reader.close();
         deck = new ArrayList<Card>();
+        players = new ArrayList<Player>();
         createDeck();
         createPlayers();
-        reader.close();
     }
     
     /** Accessors **/
     public String showResult() {
-        String winner = "";
+        String winner = "\n\n--------------=Results=----------------\n";
         int dev = 21;
         ArrayList<Player> winners = new ArrayList<Player>();
         for (Player p: players) {
@@ -62,30 +62,31 @@ public class Game
         while (stands < pnum-1) {
             stands = 0;
             for (Player p : players) {
-                if (!p.getStand()) {
+                if (p.getStand()) {
                     stands++;
                 } else if (p instanceof Dealer) {
                     p.draw(deck);
                 } else {
-                    System.out.println(p.toString());
-                    System.out.println("Draw (1) or Stand (2)? ");
+                    System.out.println("--------------=Next Player=----------------");
+                    System.out.println(p);
+                    System.out.print("Draw (1) or Stand (2)? ");
                     int choice = checkChoice.checkValidity(reader.next());
                     while (choice == -1 || (choice != 1 && choice != 2)) {
                         System.out.println("Please enter a valid number.");
-                        System.out.println("Draw (1) or Stand (2)? ");
+                        System.out.print("Draw (1) or Stand (2)? ");
                         choice = checkChoice.checkValidity(reader.next());
                     }
                     if (choice == 1) {
                         p.draw(deck);
-                        System.out.println("New Hand:");
-                        System.out.println(p.toString());
+                        System.out.println("\nNew Hand");
+                        System.out.println(p);
                     } else {
                         p.stand();
                     }
                 }
             }
         }
-        showResult();
+        System.out.println(showResult());
         reader.close();
     }
     
@@ -98,19 +99,19 @@ public class Game
     
     public void createPlayers() {
         Scanner reader = new Scanner(System.in);
-        for (int i = 0; i < pnum; i++) {
+        for (int i = 1; i <= pnum; i++) {
             System.out.print("Please enter Player " + i + "'s name: ");
             String name = reader.next();
             Player p = new Player(name);
             p.draw(deck);
             p.draw(deck);
             players.add(p);
-            System.out.println();
         }
+        reader.close();
         Dealer d = new Dealer();    
         d.draw(deck);
         d.draw(deck);
         players.add(d);
-        reader.close();
+        System.out.println("\n-------------------------------------------");
     }
 }

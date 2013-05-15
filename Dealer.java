@@ -7,6 +7,12 @@
  */
 import java.util.*;
 public class Dealer extends Player {
+    private final String name = "Dealer";
+    
+    public String getName() {
+        return name; 
+    }
+    
 	public void draw(ArrayList<Card> deck) {
 		if (getValue() < 17){
 			super.draw(deck);

@@ -1,4 +1,6 @@
 #BlueJ class context
-comment0.params=deck
-comment0.target=void\ draw(java.util.ArrayList)
-numComments=1
+comment0.params=
+comment0.target=java.lang.String\ getName()
+comment1.params=deck
+comment1.target=void\ draw(java.util.ArrayList)
+numComments=2

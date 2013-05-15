@@ -9,10 +9,8 @@ public class Card
 {
     public enum Rank { 
         Deuce(2), Three(3), Four(4), Five(5), Six(6), Seven(7), Eight(8), Nine(9), 
-        Ten(10), Jack(10), Queen(10), King(10), Ace;
+        Ten(10), Jack(10), Queen(10), King(10), Ace(0);
         private int value;
-        private Rank() {
-        }
         private Rank(int v) {
             value = v;
         }
@@ -23,8 +21,8 @@ public class Card
     
     public enum Suit { Clubs, Diamonds, Hearts, Spades }
     
-    private final Rank rank;
-    private final Suit suit;
+    private Rank rank;
+    private Suit suit;
     
     /**
      * Default Constructor
@@ -50,6 +48,9 @@ public class Card
     }
     public Suit getSuit() {
         return suit;
+    }
+    public int getValue() {
+        return rank.getValue();
     }
     
     /**

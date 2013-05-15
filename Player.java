@@ -48,20 +48,23 @@ public class Player
     /** Other methods **/
     public void draw(ArrayList<Card> deck) {
         int n = deck.size();
-        int key = (int)(Math.random()*n);
-        hand.add(deck.get(key));
-        deck.remove(key);
-        this.sum();
+        if (n != 0) {
+            int key = (int)(Math.random()*n);
+            hand.add(deck.get(key));
+            deck.remove(key);
+            this.sum();
+        }
     }
     
     public void sum() {
+        value = 0;
         int aces = 0;
         for (int i = 0; i < hand.size(); i++) {
-            if (hand.get(i).getRank().equals("Ace")) {
+            if (hand.get(i).getValue() == 0) {
                 aces++;
             }
             else {
-                value += hand.get(i).getRank().getValue();
+                value += hand.get(i).getValue();
             }
         }
         if (aces > 0) {
