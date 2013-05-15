@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.params=
+comment0.target=Game()
+comment0.text=Default\ Constructor\ *
+comment1.params=num
+comment1.target=Game(int)
+comment1.text=Normal\ Constructor\ *
+comment2.params=
+comment2.target=void\ createDeck()
+comment2.text=Other\ methods\ *
+comment3.params=
+comment3.target=void\ createPlayers()
+numComments=4
