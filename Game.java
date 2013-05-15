@@ -28,6 +28,7 @@ public class Game
     public String showResult() {
         String winner = "\n\n--------------=Results=----------------\n";
         int dev = 21;
+        boolean over = true;
         ArrayList<Player> winners = new ArrayList<Player>();
         for (Player p: players) {
             winner += p.getName() + " " + p.getValue() + "\n";
@@ -36,15 +37,19 @@ public class Game
             }
             else if (Math.abs(p.getValue() - 21) < dev && p.getValue() < 21) {
                 dev = Math.abs(p.getValue() - 21);
+                over = false;
             }
-            else if (Math.abs(p.getValue() - 21) < dev) {
+            else if (Math.abs(p.getValue() - 21) < dev && !over) {
                 dev = Math.abs(p.getValue() - 21);
             }
         }
         if (winners.size() == 0) {
             for (Player p: players) {
-                if (Math.abs(p.getValue() - 21) == dev) {
+                if (Math.abs(p.getValue() - 21) == dev && p.getValue() > 21 && !over) {
                     winners.add(p);
+                }
+                else if (Math.abs(p.getValue() - 21) == dev && over) {
+                	winners.add(p);
                 }
             }
         }
@@ -59,7 +64,7 @@ public class Game
     public void play() {
         Scanner reader = new Scanner(System.in);
         int stands = 0;
-        while (stands < pnum-1) {
+        while (stands < pnum) {
             stands = 0;
             for (Player p : players) {
                 if (p.getStand()) {
