@@ -14,19 +14,14 @@ public class Game
     
     /** Default Constructor **/
     public Game() {
+        Scanner reader = new Scanner(System.in);
+        System.out.print("Enter number of players: ");
+        pnum = reader.nextInt();
         players = new ArrayList<Player>();
-        pnum = 0;
-        deck = new ArrayList<Card>();
-        createDeck();
-    }
-    
-    /** Normal Constructor **/
-    public Game(int num) {
-        players = new ArrayList<Player>();
-        pnum = num;
         deck = new ArrayList<Card>();
         createDeck();
         createPlayers();
+        reader.close();
     }
     
     /** Accessors **/
@@ -91,6 +86,7 @@ public class Game
             }
         }
         showResult();
+        reader.close();
     }
     
     public void createDeck() {
