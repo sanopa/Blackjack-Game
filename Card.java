@@ -5,7 +5,6 @@
  * Java 1.7, MacOSX10.8
  * May 14-21, 2013
  */
-import java.util.*;
 public class Card
 {
     public enum Rank { 
