@@ -31,33 +31,33 @@ public class Game
     
     /** Accessors **/
     public String showResult() {
-    	String winner = "";
-    	int dev = 21;
-    	ArrayList<Player> winners = new ArrayList<Player>();
-    	for (Player p: players) {
-    		winner += p.getName() + " " + p.getValue() + "\n";
-    		if (p.getValue() == 21) {
-    			winners.add(p);
-    		}
-    		else if (Math.abs(p.getValue() - 21) < dev && p.getValue() < 21) {
-    			dev = Math.abs(p.getValue() - 21);
-    		}
-    		else if (Math.abs(p.getValue() - 21) < dev) {
-    			dev = Math.abs(p.getValue() - 21);
-    		}
-    	}
-    	if (winners.size() == 0) {
-    		for (Player p: players) {
-    			if (p.getValue() == dev) {
-    				winners.add(p);
-    			}
-    		}
-    	}
-    	winner += "\n\nThe winner(s):\n";
-    	for (int i = 0; i < winners.size(); i++) {
-    		winner += winners.get(i).toString();
-    	}
-    	return winner;
+        String winner = "";
+        int dev = 21;
+        ArrayList<Player> winners = new ArrayList<Player>();
+        for (Player p: players) {
+            winner += p.getName() + " " + p.getValue() + "\n";
+            if (p.getValue() == 21) {
+                winners.add(p);
+            }
+            else if (Math.abs(p.getValue() - 21) < dev && p.getValue() < 21) {
+                dev = Math.abs(p.getValue() - 21);
+            }
+            else if (Math.abs(p.getValue() - 21) < dev) {
+                dev = Math.abs(p.getValue() - 21);
+            }
+        }
+        if (winners.size() == 0) {
+            for (Player p: players) {
+                if (p.getValue() == dev) {
+                    winners.add(p);
+                }
+            }
+        }
+        winner += "\n\nThe winner(s):\n";
+        for (int i = 0; i < winners.size(); i++) {
+            winner += winners.get(i).toString();
+        }
+        return winner;
     }
     
     /** Other methods **/
@@ -74,7 +74,12 @@ public class Game
                 } else {
                     System.out.println(p.toString());
                     System.out.println("Draw (1) or Stand (2)? ");
-                    int choice = reader.nextInt();
+                    int choice = checkChoice.checkValidity(reader.next());
+                    while (choice == -1 || (choice != 1 && choice != 2)) {
+                        System.out.println("Please enter a valid number.");
+                        System.out.println("Draw (1) or Stand (2)? ");
+                        choice = checkChoice.checkValidity(reader.next());
+                    }
                     if (choice == 1) {
                         p.draw(deck);
                         System.out.println("New Hand:");

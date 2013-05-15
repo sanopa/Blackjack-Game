@@ -1,0 +1,5 @@
+#BlueJ class context
+comment0.params=stringChoice
+comment0.target=int\ checkValidity(java.lang.String)
+comment0.text=\n\ Checks\ the\ validity\ of\ user\ input\n\ Pre\:\ User\ input\n\ Post\:\ User\ input\ that\ is\ unchanged\ or\ "-1"\ if\ the\ user\ input\ is\ invalid\n
+numComments=1

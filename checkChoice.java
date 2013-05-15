@@ -1,7 +1,9 @@
-/*
+/**
  * Alex Yang
  * APCSSec01YL12
- * Mathey Project Choice Validity Checker
+ * Blackjack: checkChoice (reused from Mathey)
+ * Java 1.7, MacOSX10.8
+ * May 14-21, 2013
  */
 import java.util.*;
 public class checkChoice {
