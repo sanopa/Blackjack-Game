@@ -31,7 +31,7 @@ public class Game
         boolean over = true;
         ArrayList<Player> winners = new ArrayList<Player>();
         for (Player p: players) {
-            winner += p.getName() + " " + p.getValue() + "\n";
+            winner += p.getName() + "'s Points: " + p.getValue() + "\n";
             if (p.getValue() == 21) {
                 winners.add(p);
             }
