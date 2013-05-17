@@ -6,6 +6,7 @@
  * May 14-21, 2013
  */
 import javax.swing.*; 
+import javax.swing.border.*;
 import javax.imageio.*;
   
 import java.awt.*;
@@ -21,6 +22,7 @@ public class GameG extends JLabel implements ActionListener
     private ArrayList<Player> players;
     private int pnum;
     private int dnum;
+    private int choice = 0;
     private ArrayList<Card> deck;
     
     private JButton draw = new JButton("Draw");
@@ -28,10 +30,10 @@ public class GameG extends JLabel implements ActionListener
     private JButton play = new JButton("Play!");
     private JButton next = new JButton("Next");
     private JFrame frame = new JFrame("Blackjack Game");
-    private JTextField pln = new JTextField(10);
     private JTextField dkn = new JTextField(10);
-    private JTextField pname = new JTextField(10);
-    private JPanel gpanel, beginningimg, beginning, pnames;  
+    private JTextField pkn = new JTextField(10);
+    private JTextArea pname = new JTextArea(10, 10);
+    private JPanel gpanel, beginningimg, beginning, pnames, pdisplay;
     
     /** Default Constructor **/
     public GameG() {
@@ -49,12 +51,12 @@ public class GameG extends JLabel implements ActionListener
         beginningimg.add(bimg);
         
         beginning = new JPanel();
-        JLabel pl = new JLabel("Enter number of players: ");
         JLabel dk = new JLabel("Enter number of decks: ");
+        JLabel pk = new JLabel("Enter number of players: ");
         
         play.addActionListener(this);
-        beginning.add(pl);
-        beginning.add(pln);
+        beginning.add(pk);
+        beginning.add(pkn);
         beginning.add(dk);
         beginning.add(dkn);
         beginning.add(play);
@@ -62,22 +64,29 @@ public class GameG extends JLabel implements ActionListener
         frame.add(beginningimg, BorderLayout.NORTH);
         frame.add(beginning,BorderLayout.CENTER);   
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
-        frame.setSize(600,500);  
+        frame.setSize(600,550);  
         frame.setVisible(true);
     }
     
     public void actionPerformed(ActionEvent event) {
         if (event.getSource() == play) {
-            pnum = Integer.parseInt(pln.getText());
             dnum = Integer.parseInt(dkn.getText());
+            pnum = Integer.parseInt(pkn.getText());
             createDeck();
             createPlayers();
-            //play();
         } else if (event.getSource() == next) {
-            Player p = new Player(pname.getText());
-            p.draw(deck);
-            p.draw(deck);
-            players.add(p);
+            String[] names = pname.getText().split(" ");
+            pnum = names.length;
+            for (int i = 0; i < names.length; i++) {
+                Player p = new Player(names[i]);
+                p.draw(deck);
+                p.draw(deck);
+                players.add(p);
+            }
+        } else if (event.getSource() == draw) {
+            choice = 1;
+        } else if (event.getSource() == stand) {
+            choice = 2;
         }
     }
     
@@ -126,18 +135,16 @@ public class GameG extends JLabel implements ActionListener
      * Post: the results are calculated using a different method and displayed
      */
     public void play() {
-        gpanel=new JPanel();
+        frame.getContentPane().remove(pnames);
+        gpanel = new JPanel();
         gpanel.setLayout(new GridLayout(1,2));
         draw.addActionListener(this);
         stand.addActionListener(this);
         gpanel.add(draw);
         gpanel.add(stand);
-        //frame.getContentPane().remove(beginningimg);
-        frame.setContentPane(gpanel);
-        frame.validate();
-        frame.repaint();
+        pdisplay = new JPanel();
+        pdisplay.setLayout(new BoxLayout(pdisplay, BoxLayout.PAGE_AXIS));
         
-        Scanner reader = new Scanner(System.in);
         int stands = 0;
         while (stands < pnum) {
             stands = 0;
@@ -147,27 +154,25 @@ public class GameG extends JLabel implements ActionListener
                 } else if (p instanceof Dealer) {
                     p.draw(deck);
                 } else {
-                    System.out.println("--------------=Next Player=----------------");
-                    System.out.println(p);
-                    System.out.print("Draw (1) or Stand (2)? ");
-                    int choice = checkChoice.checkValidity(reader.next());
-                    while (choice == -1 || (choice != 1 && choice != 2)) {
-                        System.out.println("Please enter a valid number.");
-                        System.out.print("Draw (1) or Stand (2)? ");
-                        choice = checkChoice.checkValidity(reader.next());
-                    }
+                    JLabel stats = new JLabel(p.toString());
+                    pdisplay.add(stats);
+                    frame.add(pdisplay, BorderLayout.CENTER);
+                    frame.add(gpanel, BorderLayout.SOUTH);
+                    frame.validate();
+                    frame.repaint();
                     if (choice == 1) {
                         p.draw(deck);
-                        System.out.println("\nNew Hand");
-                        System.out.println(p);
-                    } else {
+                        stats.setText(p.toString());
+                        frame.validate();
+                        frame.repaint();
+                    } else if (choice == 2) {
                         p.stand();
                     }
+                    
                 }
             }
         }
-        System.out.println(showResult());
-        reader.close();
+        showResult();
     }
     
     /**
@@ -191,24 +196,25 @@ public class GameG extends JLabel implements ActionListener
      * Post: the requested number of Players is created and each Player receives two cards
      */
     public void createPlayers() {
-        pnames = new JPanel();
-        JLabel pn = new JLabel();
-        frame.getContentPane().remove(beginning);
-        next.addActionListener(this);
-        for (int i = 1; i <= pnum; i++) {
-            pn.setText("Enter Player " + i + "'s name: ");
-            pnames.add(pn);
-            pnames.add(pname);
-            pnames.add(next);
-            frame.add(pnames, BorderLayout.SOUTH);
-            frame.revalidate();
-            frame.repaint();
-        }
         Dealer d = new Dealer();    
         d.draw(deck);
         d.draw(deck);
         players.add(d);
-        //System.out.println("\n-------------------------------------------");
+        frame.getContentPane().remove(beginning);
+        pnames = new JPanel();
+        pnames.setLayout(new BoxLayout(pnames, BoxLayout.PAGE_AXIS));
+        JLabel pn = new JLabel("Enter Players' names, separated by spaces");
+        next.addActionListener(this);
+        pn.setAlignmentX(Component.CENTER_ALIGNMENT);
+        pname.setAlignmentX(Component.CENTER_ALIGNMENT);
+        next.setAlignmentX(Component.CENTER_ALIGNMENT);
+        pnames.setBorder(new EmptyBorder(10, 10, 10, 10));
+        pnames.add(pn);
+        pnames.add(pname);
+        pnames.add(next);
+        frame.add(pnames);
+        frame.revalidate();
+        frame.repaint();
     }
     
     public static void main(String[]args) {
