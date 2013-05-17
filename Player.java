@@ -46,6 +46,11 @@ public class Player
     }
     
     /** Other methods **/
+    /**
+     * Makes the player draw a card from a deck and puts it in his hand, removing the card from the deck
+     * Pre: ArrayList<Card> deck is a list of cards
+     * Post: a Card from deck has been added to the player's hand and removed from the deck
+     */
     public void draw(ArrayList<Card> deck) {
         int n = deck.size();
         if (n != 0) {
@@ -56,6 +61,11 @@ public class Player
         }
     }
     
+    /**
+     * Sums up the Player's hand
+     * Pre: none
+     * Post: the value of the Player's hand has been readjusted to account for new draws
+     */
     public void sum() {
         value = 0;
         int aces = 0;
@@ -77,6 +87,11 @@ public class Player
         }
     }
     
+    /**
+     * Show a Player's statistics
+     * Pre: none
+     * Post: a String with the Player's statistics is returned
+     */
     public String toString() {
         String result = "Name: " + getName() + "\n";
         result += "Hand: ";

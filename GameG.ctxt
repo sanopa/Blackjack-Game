@@ -1,0 +1,21 @@
+#BlueJ class context
+comment0.params=
+comment0.target=GameG()
+comment0.text=Default\ Constructor\ *
+comment1.params=event
+comment1.target=void\ actionPerformed(java.awt.event.ActionEvent)
+comment2.params=
+comment2.target=java.lang.String\ showResult()
+comment2.text=Accessors\ *
+comment3.params=
+comment3.target=void\ play()
+comment3.text=\n\ Plays\ the\ game,\ going\ through\ all\ players\ and\ letting\ them\ draw\ or\ stand\ until\ everybody\ stands\n\ Pre\:\ none\n\ Post\:\ the\ results\ are\ calculated\ using\ a\ different\ method\ and\ displayed\n
+comment4.params=
+comment4.target=void\ createDeck()
+comment4.text=\n\ Creates\ a\ standard\ deck\ of\ cards\n\ Pre\:\ none\n\ Post\:\ a\ new\ deck\ is\ created\n
+comment5.params=
+comment5.target=void\ createPlayers()
+comment5.text=\n\ Creates\ the\ Players\ in\ the\ game\ and\ the\ dealer,\ drawing\ two\ cards\ for\ each\n\ Pre\:\ none\n\ Post\:\ the\ requested\ number\ of\ Players\ is\ created\ and\ each\ Player\ receives\ two\ cards\n
+comment6.params=args
+comment6.target=void\ main(java.lang.String[])
+numComments=7

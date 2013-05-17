@@ -7,13 +7,18 @@
  */
 public class Card
 {
+    /** Instance Variables **/
+    /** Enums **/
+    //define enums to use for creating a deck of cards and for defining a card by its rank, value, and suit
     public enum Rank { 
         Deuce(2), Three(3), Four(4), Five(5), Six(6), Seven(7), Eight(8), Nine(9), 
         Ten(10), Jack(10), Queen(10), King(10), Ace(0);
         private int value;
+        /** Normal Constructor **/
         private Rank(int v) {
             value = v;
         }
+        /** Accessor **/
         public int getValue() {
           return value;
         }
