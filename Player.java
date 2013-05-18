@@ -44,6 +44,16 @@ public class Player
     public int getValue() {
         return value;
     }
+    public String getHand() {
+        String result = "";
+        for (int i = 0; i < hand.size(); i++) {
+            result += hand.get(i).toString();
+            if (!(i == (hand.size()-1))) {
+                result += ", ";
+            }
+        }
+        return result;
+    }
     
     /** Other methods **/
     /**
@@ -53,7 +63,7 @@ public class Player
      */
     public void draw(ArrayList<Card> deck) {
         int n = deck.size();
-        if (n != 0) {
+        if (n != 0 && !stand) {
             int key = (int)(Math.random()*n);
             hand.add(deck.get(key));
             deck.remove(key);
@@ -86,6 +96,7 @@ public class Player
             }
         }
     }
+    
     
     /**
      * Show a Player's statistics
